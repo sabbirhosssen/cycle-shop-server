@@ -26,8 +26,8 @@ async function run() {
             res.send(cycle);
         })
         //Get single book 
-        app.get('/allCycle/:id', async(req,res)=>{
-            const id = req.params.id;
+        app.get('/allCycle/:Id', async(req,res)=>{
+            const id = req.params.Id;
             const query ={_id: ObjectId(id)}
             const cycle=await booksCollection.findOne(query)
             res.json(cycle)
@@ -42,9 +42,15 @@ async function run() {
          console.log(result);
         //  res.send('post hitted')
          res.json(result)
+        });
+        app.delete('/allCycle/:Id', async (req,res)=>{
+            const id =req.params.Id;
+            const query = {_id: ObjectId(id)}
+            const cycle=await booksCollection.deleteOne(query)
+            res.json(cycle) 
         })
  
-    }
+    }   
     finally{
         // await client.close();
     }
